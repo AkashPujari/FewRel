@@ -80,8 +80,6 @@ python train_demo.py \
     --batch_size 4
 ```
 
-Note that `--fp16` requires Nvidia's [apex](https://github.com/NVIDIA/apex).
-
 |                   | 5 way 1 shot | 5 way 5 shot | 10 way 1 shot | 10 way 5 shot |
 |  ---------------  | -----------  | ------------- | ------------ | ------------- |
 | Val               | 85.66 | 89.48 | 76.84 | 81.76 |
