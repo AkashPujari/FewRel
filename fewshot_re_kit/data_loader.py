@@ -103,7 +103,7 @@ def collate_fn(data):
     return batch_support, batch_query, batch_label
 
 def get_loader(name, encoder, N, K, Q, batch_size, 
-        num_workers=8, collate_fn=collate_fn, na_rate=0, root='./data'):
+        num_workers=4, collate_fn=collate_fn, na_rate=0, root='./data'):
     dataset = FewRelDataset(name, encoder, N, K, Q, na_rate, root)
     data_loader = data.DataLoader(dataset=dataset,
             batch_size=batch_size,
@@ -222,7 +222,7 @@ def collate_fn_pair(data):
     return batch_set, batch_label
 
 def get_loader_pair(name, encoder, N, K, Q, batch_size, 
-        num_workers=8, collate_fn=collate_fn_pair, na_rate=0, root='./data', encoder_name='bert'):
+        num_workers=4, collate_fn=collate_fn_pair, na_rate=0, root='./data', encoder_name='bert'):
     dataset = FewRelDatasetPair(name, encoder, N, K, Q, na_rate, root, encoder_name)
     data_loader = data.DataLoader(dataset=dataset,
             batch_size=batch_size,
@@ -291,7 +291,7 @@ def collate_fn_unsupervised(data):
     return batch_support
 
 def get_loader_unsupervised(name, encoder, N, K, Q, batch_size, 
-        num_workers=8, collate_fn=collate_fn_unsupervised, na_rate=0, root='./data'):
+        num_workers=4, collate_fn=collate_fn_unsupervised, na_rate=0, root='./data'):
     dataset = FewRelUnsupervisedDataset(name, encoder, N, K, Q, na_rate, root)
     data_loader = data.DataLoader(dataset=dataset,
             batch_size=batch_size,
