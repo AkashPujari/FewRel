@@ -87,7 +87,7 @@ Here we provide a BERT-PAIR [checkpoint](https://thunlp.oss-cn-qingdao.aliyuncs.
 python train_demo.py \
     --trainN 5 --N 5 --K 1 --Q 1 \
     --model pair --encoder bert --pair --hidden_size 768 --val_step 1000 \
-    --batch_size 4  --fp16 \
+    --batch_size 4
 ```
 
 Note that `--fp16` requires Nvidia's [apex](https://github.com/NVIDIA/apex).
