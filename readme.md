@@ -69,16 +69,6 @@ This will start the training and evaluating process of Prototypical Networks in 
 
 There are also many args for training (like `batch_size` and `lr`) and you can find more details in our codes.
 
-## Inference
-
-You can evaluate an existing checkpoint by
-
-```bash
-python train_demo.py --only_test --load_ckpt {CHECKPOINT_PATH} {OTHER_ARGS}
-```
-
-Here we provide a BERT-PAIR [checkpoint](https://thunlp.oss-cn-qingdao.aliyuncs.com/fewrel/pair-bert-train_wiki-val_wiki-5-1.pth.tar) (trained on FewRel 1.0 dataset, 5 way 1 shot).
-
 ## Reproduction
 
 **BERT-PAIR for FewRel 1.0**
