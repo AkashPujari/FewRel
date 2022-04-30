@@ -211,6 +211,8 @@ def main():
         model = Siamese(sentence_encoder, hidden_size=opt.hidden_size, dropout=opt.dropout)
     elif model_name == 'pair':
         model = Pair(sentence_encoder, hidden_size=opt.hidden_size)
+    elif model_name == 'pair_ne':
+        model = Pair_noneuclidean(sentence_encoder, hidden_size=opt.hidden_size)
     elif model_name == 'mtb':
         model = Mtb(sentence_encoder, use_dropout=not opt.no_dropout)
     else:
