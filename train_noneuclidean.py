@@ -9,6 +9,7 @@ from models.snail import SNAIL
 from models.metanet import MetaNet
 from models.siamese import Siamese
 from models.pair import Pair
+from models.pair_noneuclidean import Pair_noneuclidean
 from models.d import Discriminator
 from models.mtb import Mtb
 import sys
