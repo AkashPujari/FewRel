@@ -13,7 +13,8 @@ class Pair_noneuclidean(fewshot_re_kit.framework_noneuclidean.FewShotREModel):
     def __init__(self, sentence_encoder, hidden_size=230):
         fewshot_re_kit.framework_noneuclidean.FewShotREModel.__init__(self, sentence_encoder)
         self.hidden_size = hidden_size
-        self.fc = mnn.rLinear(hidden_size, hidden_size, weight_manifold=mnn.Stiefel)
+#         self.fc = mnn.rLinear(hidden_size, hidden_size, weight_manifold=mnn.Stiefel)
+        self.fc =  mnn.rLinear(hidden_size, hidden_size, weight_manifold=mnn.Hyperbolic)
         self.drop = nn.Dropout()
 
     def forward(self, batch, N, K, total_Q):
