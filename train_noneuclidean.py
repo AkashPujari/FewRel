@@ -1,5 +1,6 @@
 from fewshot_re_kit.data_loader import get_loader, get_loader_pair, get_loader_unsupervised
-from fewshot_re_kit.framework import FewShotREFramework
+# from fewshot_re_kit.framework import FewShotREFramework
+from fewshot_re_kit.framework_noneuclidean import FewShotREFramework
 from fewshot_re_kit.sentence_encoder import CNNSentenceEncoder, BERTSentenceEncoder, BERTPAIRSentenceEncoder, RobertaSentenceEncoder, RobertaPAIRSentenceEncoder
 import models
 from models.proto import Proto
@@ -182,9 +183,9 @@ def main():
         raise NotImplementedError
     if opt.adv:
         d = Discriminator(opt.hidden_size)
-        framework = FewShotREFramework(train_data_loader, val_data_loader, test_data_loader, adv_data_loader, adv=opt.adv, d=d)
+        framework_noneuclidean = FewShotREFramework(train_data_loader, val_data_loader, test_data_loader, adv_data_loader, adv=opt.adv, d=d)
     else:
-        framework = FewShotREFramework(train_data_loader, val_data_loader, test_data_loader)
+        framework_noneuclidean = FewShotREFramework(train_data_loader, val_data_loader, test_data_loader)
         
     prefix = '-'.join([model_name, encoder_name, opt.train, opt.val, str(N), str(K)])
     if opt.adv is not None:
@@ -237,7 +238,7 @@ def main():
                 opt.lr = 1e-1
         
         opt.train_iter = opt.train_iter * opt.grad_iter
-        framework.train(model, prefix, batch_size, trainN, N, K, Q,
+        framework_noneuclidean.train(model, prefix, batch_size, trainN, N, K, Q,
                 pytorch_optim=pytorch_optim, load_ckpt=opt.load_ckpt, save_ckpt=ckpt,
                 na_rate=opt.na_rate, val_step=opt.val_step, fp16=opt.fp16, pair=opt.pair, 
                 train_iter=opt.train_iter, val_iter=opt.val_iter, bert_optim=bert_optim, 
@@ -248,7 +249,7 @@ def main():
             print("Warning: --load_ckpt is not specified. Will load Hugginface pre-trained checkpoint.")
             ckpt = 'none'
 
-    acc = framework.eval(model, batch_size, N, K, Q, opt.test_iter, na_rate=opt.na_rate, ckpt=ckpt, pair=opt.pair)
+    acc = framework_noneuclidean.eval(model, batch_size, N, K, Q, opt.test_iter, na_rate=opt.na_rate, ckpt=ckpt, pair=opt.pair)
     print("RESULT: %.2f" % (acc * 100))
 
 if __name__ == "__main__":
