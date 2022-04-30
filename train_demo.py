@@ -38,7 +38,7 @@ def main():
             help='Num of query per class')
     parser.add_argument('--batch_size', default=4, type=int,
             help='batch size')
-    parser.add_argument('--train_iter', default=5000, type=int,
+    parser.add_argument('--train_iter', default=3000, type=int,
             help='num of iters in training')
     parser.add_argument('--val_iter', default=1000, type=int,
             help='num of iters in validation')
