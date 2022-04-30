@@ -13,6 +13,8 @@ from models.mtb import Mtb
 import sys
 import torch
 from torch import optim, nn
+import mctorch.nn as mnn
+import mctorch.optim as moptim
 import numpy as np
 import json
 import argparse
@@ -170,7 +172,7 @@ def main():
                 N=trainN, K=K, Q=Q, na_rate=opt.na_rate, batch_size=batch_size)
    
     if opt.optim == 'sgd':
-        pytorch_optim = optim.SGD
+        pytorch_optim = moptim.rSGD
     elif opt.optim == 'adam':
         pytorch_optim = optim.Adam
     elif opt.optim == 'adamw':
