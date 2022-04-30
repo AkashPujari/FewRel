@@ -5,13 +5,15 @@ import torch
 from torch import autograd, optim, nn
 from torch.autograd import Variable
 from torch.nn import functional as F
+import mctorch.nn as mnn
+import torch.nn.functional as F
 
-class Pair(fewshot_re_kit.framework.FewShotREModel):
+class Pair_noneuclidean(fewshot_re_kit.framework.FewShotREModel):
     
     def __init__(self, sentence_encoder, hidden_size=230):
         fewshot_re_kit.framework.FewShotREModel.__init__(self, sentence_encoder)
         self.hidden_size = hidden_size
-        self.fc = nn.Linear(hidden_size, hidden_size)
+        self.fc = mnn.rLinear(hidden_size, hidden_size, weight_manifold=mnn.Stiefel)
         self.drop = nn.Dropout()
 
     def forward(self, batch, N, K, total_Q):
