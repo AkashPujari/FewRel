@@ -7,6 +7,8 @@ from . import sentence_encoder
 from . import data_loader
 import torch
 from torch import autograd, optim, nn
+import mctorch.nn as mnn
+import mctorch.optim as moptim
 from torch.autograd import Variable
 from torch.nn import functional as F
 # from pytorch_pretrained_bert import BertAdam
@@ -111,7 +113,7 @@ class FewShotREFramework:
               test_iter=3000,
               load_ckpt=None,
               save_ckpt=None,
-              pytorch_optim=optim.SGD,
+              pytorch_optim=moptim.rSGD,
               bert_optim=False,
               warmup=True,
               warmup_step=300,
@@ -151,7 +153,7 @@ class FewShotREFramework:
                     if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
             ]
             if use_sgd_for_bert:
-                optimizer = torch.optim.SGD(parameters_to_optimize, lr=learning_rate)
+                optimizer = moptim.rSGD(parameters_to_optimize, lr=learning_rate)
             else:
                 optimizer = AdamW(parameters_to_optimize, lr=learning_rate, correct_bias=False)
             if self.adv:
