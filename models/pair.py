@@ -11,7 +11,7 @@ class Pair(fewshot_re_kit.framework.FewShotREModel):
     def __init__(self, sentence_encoder, hidden_size=230):
         fewshot_re_kit.framework.FewShotREModel.__init__(self, sentence_encoder)
         self.hidden_size = hidden_size
-        # self.fc = nn.Linear(hidden_size, hidden_size)
+        self.fc = nn.Linear(hidden_size, hidden_size)
         self.drop = nn.Dropout()
 
     def forward(self, batch, N, K, total_Q):
