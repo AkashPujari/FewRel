@@ -8,10 +8,10 @@ from torch.nn import functional as F
 import mctorch.nn as mnn
 import torch.nn.functional as F
 
-class Pair_noneuclidean(fewshot_re_kit.framework.FewShotREModel):
+class Pair_noneuclidean(fewshot_re_kit.framework_noneuclidean.FewShotREModel):
     
     def __init__(self, sentence_encoder, hidden_size=230):
-        fewshot_re_kit.framework.FewShotREModel.__init__(self, sentence_encoder)
+        fewshot_re_kit.framework_noneuclidean.FewShotREModel.__init__(self, sentence_encoder)
         self.hidden_size = hidden_size
         self.fc = mnn.rLinear(hidden_size, hidden_size, weight_manifold=mnn.Stiefel)
         self.drop = nn.Dropout()
