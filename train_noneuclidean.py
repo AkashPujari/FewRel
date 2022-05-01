@@ -177,6 +177,8 @@ def main():
         pytorch_optim = moptim.rSGD
     elif opt.optim == 'adam':
         pytorch_optim = optim.Adam
+    elif opt.optim == 'adagrad':
+        pytorch_optim = moptim.rAdagrad
     elif opt.optim == 'adamw':
         from transformers import AdamW
         pytorch_optim = AdamW
