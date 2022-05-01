@@ -155,9 +155,9 @@ class FewShotREFramework:
             if use_sgd_for_bert:
                 optimizer = moptim.rSGD(parameters_to_optimize, lr=learning_rate)
             else:
-                optimizer = AdamW(parameters_to_optimize, lr=learning_rate, correct_bias=False)
+                optimizer = pytorch_optim(parameters_to_optimize, lr=learning_rate, correct_bias=False)
             if self.adv:
-                optimizer_encoder = AdamW(parameters_to_optimize, lr=1e-5, correct_bias=False)
+                optimizer_encoder = pytorch_optim(parameters_to_optimize, lr=1e-5, correct_bias=False)
             scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_step, num_training_steps=train_iter) 
         else:
             optimizer = pytorch_optim(model.parameters(),
