@@ -143,7 +143,7 @@ class FewShotREFramework:
     
         # Init
         if bert_optim:
-            print('Using bert optim')
+#             print('Using bert optim')
             parameters_to_optimize = list(model.named_parameters())
             no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
             parameters_to_optimize = [
@@ -156,9 +156,9 @@ class FewShotREFramework:
                 optimizer = moptim.rSGD(parameters_to_optimize, lr=learning_rate)
             else:
                 print('optimizer: ',pytorch_optim)
-                optimizer = pytorch_optim(parameters_to_optimize, lr=learning_rate)
+                optimizer = AdamW(parameters_to_optimize, lr=learning_rate, correct_bias = False)
             if self.adv:
-                optimizer_encoder = pytorch_optim(parameters_to_optimize, lr=1e-5)
+                optimizer_encoder = AdamW(parameters_to_optimize, lr=1e-5, correct_bias = False)
             scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_step, num_training_steps=train_iter) 
         else:
             optimizer = pytorch_optim(model.parameters(),
